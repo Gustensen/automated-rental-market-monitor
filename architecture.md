@@ -89,9 +89,12 @@ Automate a daily rental search workflow: fetch active listings, dedupe against p
 ## Current Repo Layout
 
 ```text
-rental-market-monitor/
+
 ├── .github/workflows/
 ├── src/
+|    ├──db/
+|        ├──listings.db
+|        ├──storage.py
 │   ├── fetch_rentcast.py
 │   ├── storage.py
 │   └── email_digest.py

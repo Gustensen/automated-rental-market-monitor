@@ -1,7 +1,7 @@
 # Automated Rental Market Monitor
 
 Personal automation project that checks rental listings against my
-criteria (price, bedrooms, location, pet policy, utilities etc..) and sends
+criteria (price, bedrooms, bathrooms, location,) and sends
 a daily email digest of new matches.
 
 ## Stack
