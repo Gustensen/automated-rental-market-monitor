@@ -1,0 +1,50 @@
+name: Weekly Rental Monitor
+
+on:
+  schedule:
+    # 13:00 UTC is approximately 9:00 AM Eastern during DST.
+    # GitHub Actions cron is UTC and cannot automatically track DST shifts.
+    - cron: "0 13 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run-monitor:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Check out repository so the workflow can read code and commit db updates.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Install uv so dependency sync and execution use your uv workflow.
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v3
+
+      # Install dependencies from pyproject.toml / uv.lock.
+      - name: Sync dependencies
+        run: uv sync
+
+      # Run your main pipeline with secrets injected as environment variables.
+      - name: Run weekly monitor
+        env:
+          RENTCAST_API_KEY: ${{ secrets.RENTCAST_API_KEY }}
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
+        run: uv run main.py
+
+      # Persist listings.db so dedupe state survives ephemeral CI runners.
+      - name: Commit updated listings database
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add listings.db
+          if git diff --cached --quiet; then
+            echo "No listings.db changes to commit."
+          else
+            git commit -m "chore: update listings database [skip ci]"
+            git push
+          fi
