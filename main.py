@@ -18,7 +18,7 @@ def main():
             listings = fetch_listings(
                 city=city,
                 state=state,
-                price=2300,
+                price=2000,
                 bedrooms=2,
                 bathrooms=1,
             )

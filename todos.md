@@ -20,7 +20,7 @@
 - [x] Write `src/fetch_rentcast.py` to pull active listings via `requests`
 - [x] Design SQLite schema for `listings.db` (listings table + dedupe key)
 - [x] Write `src/storage.py` insert/query logic using `INSERT OR IGNORE`
-- [x] Implement core filters: max price $2,300, 2 bedrooms, 1 bathroom
+- [x] Implement core filters: max price $2,000, 2 bedrooms, 1 bathroom
 - [x] Implement location filters: target neighborhoods and ZIP codes
 - [x] Require listed address in the final match set
 - [x] Build Google Maps link from address as a listing "link" substitute

@@ -90,7 +90,8 @@ Automate a daily rental search workflow: fetch active listings, dedupe against p
 
 ```text
 
-├── .github/workflows/
+├── .github/workflows
+     ├── weekly.yml
 ├── src/
 |    ├──db/
 |        ├──listings.db
@@ -98,6 +99,7 @@ Automate a daily rental search workflow: fetch active listings, dedupe against p
 │   ├── fetch_rentcast.py
 │   ├── storage.py
 │   └── email_digest.py
+    ├── send_email.py
 ├── main.py
 ├── .env (gitignored)
 ├── .gitignore
