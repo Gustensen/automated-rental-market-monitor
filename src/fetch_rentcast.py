@@ -10,7 +10,8 @@ BASE_URL = "https://api.rentcast.io/v1/listings/rental/long-term"
 
 
 
-def fetch_listings(price=2000, bedrooms=2, bathrooms=1, limit=50, city=None, state=None, zip_code=None):
+
+def fetch_listings(price=2700, bedrooms=2, bathrooms=1, limit=50, city=None, state=None, zip_code=None):
     """
     Calls RentCast's active rental listings endpoint for one search area.
     Pass either (city, state) OR zip_code, not both.
